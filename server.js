@@ -26,6 +26,10 @@ app.use(errorHandler);
 
 app.use('/api/pirates',  proyectoRouter);
 
+app.get('/api/pirates/health', (req, res) => {
+    res.status(200).json ({message: "Servidor activo!"});
+});
+
 conectarDB();
 
 app.listen(port, () => {
