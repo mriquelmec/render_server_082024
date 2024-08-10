@@ -15,7 +15,13 @@ const app = express();
 const port = process.env.PORT || 8000;
 
 app.use(cookieParser());
-app.use(cors({ credentials: true }));
+app.use(cors({ 
+origin: ['http://localhost:5173', 'https://client-vercel-082024.vercel.app'], //para render
+methods: ['GET', 'POST', 'PUT', 'DELETE'],
+allowedHeaders: ['Content-Type', 'Authorization'],
+credentials: true,
+}));
+
 app.use(helmet());
 app.use(morgan('tiny'));
 
@@ -27,7 +33,7 @@ app.use(errorHandler);
 app.use('/api/pirates',  proyectoRouter);
 
 app.get('/api/pirates/health', (req, res) => {
-    res.status(200).json ({message: "Servidor activo!"});
+    res.status(200).json ({message: "Servidor activo!"}); //para render
 });
 
 conectarDB();
